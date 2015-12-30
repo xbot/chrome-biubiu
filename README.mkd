@@ -11,6 +11,11 @@ Features
 * Toggle to enable or disable BiuBiu.
 * Block requests made by JQuery by URL.
 
+Author
+------
+
+Donie Leigh <donie.leigh@gmail.com>
+
 Links
 -----
 
