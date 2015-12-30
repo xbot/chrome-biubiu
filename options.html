@@ -1,0 +1,73 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>BiuBiu Settings</title>
+    <script src="lib/jquery-1.8.1.min.js"></script>
+    <script src="lib/jquery.center.js"></script>
+    <script src="lib/php.js"></script>
+    <script src="options.js"></script>
+    <style type="text/css" media="screen">
+        .plate {
+            margin-left:auto;
+            margin-right:auto;
+            border:1px dashed;
+            width:600px;
+            padding:10px;
+            background-color:#96ff38;
+        }
+        .title_icon {
+            float:left;
+        }
+        .title {
+            float:left;
+            font:bold 48px "Comic Sans MS";
+            margin-left:150px;
+            margin-top:-100px;
+            width:450px;
+        }
+        .abs_splitter {
+            border-bottom: 1px solid;
+            margin-bottom: 10px;
+            margin-top:150px;
+        }
+        .splitter {
+            border-bottom: 1px solid;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        .ln_header {
+            text-align:left;
+            width:300;
+            font:bold 14px arial,sans-serif;
+        }
+        .notice {
+            border:1px dashed;
+            width:200px;
+            line-height:30px;
+            background-color:#FDF6E3;
+            display:none;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <div class="plate">
+        <div class="notice"></div>
+        <div class="title_icon">
+            <img src="img/bug_off.png" alt=""/>
+        </div>
+        <div class="title">BiuBiu</div>
+        <div class="abs_splitter"></div>
+        <table border="0">
+            <tr>
+                <td class="ln_header">URL:</td>
+                <td><input type="text" id="url_to_block"/></td>
+            </tr>
+        </table>
+        <div class="splitter"></div>
+        <div id="divButtons">
+            <input type="button" id="btnSaveSettings" value="Save"/>
+        </div>
+    </div>
+</body>
+</html>
