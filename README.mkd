@@ -32,6 +32,10 @@ FAQ
 Change Log
 ----------
 
+**version 1.0.1 (2015-12-31)**
+
+* Fix the complaining when there is no jQuery or jQuery.cookie.js loaded in the injected page.
+
 **version 1.0.0 (2015-12-30)**
 
 * Initial release.

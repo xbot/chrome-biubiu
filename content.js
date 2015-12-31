@@ -1,7 +1,7 @@
 // Show page action
 chrome.extension.sendMessage({
     showAction: 1,
-    biubiuOn: (1 == $.cookie('cookie_biubiu_on') ? 1:0)
+    biubiuOn: (1 == $.cookie('cookie_biubiu_on') ? 1 : 0)
 }, function(response) {
     console.log('BiuBiu plugin activated !');
 });
@@ -18,13 +18,27 @@ chrome.extension.sendMessage({
 }, function(response) {
     var declarations = 'var url_to_block = "' + response.settings.url_to_block + '";';
     injectScript(declarations + "(" + (function() {
-        $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
-            var biubiuOn = $.cookie('cookie_biubiu_on');
-            if (biubiuOn == 1 && options.url == url_to_block) {
-                console.log('AJAX request to "' + url_to_block + '" is blocked.');
-                jqXHR.abort();
+        if (typeof jQuery != 'undefined') {
+            var biubiuOn = 0;
+            var cName = 'cookie_biubiu_on';
+            if (document.cookie.length > 0) {
+                var cStart = document.cookie.indexOf(cName + "=")
+                if (cStart != -1) {
+                    cStart = cStart + cName.length + 1
+                    var cEnd = document.cookie.indexOf(";", cStart)
+                    if (cEnd == -1) cEnd = document.cookie.length
+                    biubiuOn = unescape(document.cookie.substring(cStart, cEnd))
+                }
             }
-        });
+            $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+                if (biubiuOn == 1 && options.url == url_to_block) {
+                    console.log('AJAX request to "' + url_to_block + '" is blocked.');
+                    jqXHR.abort();
+                }
+            });
+        } else {
+            console.log("No jQuery found, BiuBiu won't biubiu.");
+        }
     }).toString() + ")()");
 });
 

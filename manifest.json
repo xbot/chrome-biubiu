@@ -1,6 +1,6 @@
 {
     "name" : "BiuBiu",
-    "version" : "1.0.0",
+    "version" : "1.0.1",
     "description" : "A helper for blocking JQuery AJAX requests.",
     "permissions" : ["http://*/*", "https://*/*", "notifications", "tabs"],
     "options_page" : "options.html",
