@@ -6,18 +6,11 @@ chrome.extension.sendMessage({
     console.log('BiuBiu plugin activated !');
 });
 
-function injectScript(source) {
-    var elem = document.createElement("script");
-    elem.type = "text/javascript";
-    elem.innerHTML = source;
-    document.documentElement.appendChild(elem);
-}
-
 chrome.extension.sendMessage({
     getSettings: 1
 }, function(response) {
     var declarations = 'var url_to_block = "' + response.settings.url_to_block + '";';
-    injectScript(declarations + "(" + (function() {
+    InjectScript(declarations + "(" + (function() {
         if (typeof jQuery != 'undefined') {
             var biubiuOn = 0;
             var cName = 'cookie_biubiu_on';
@@ -55,7 +48,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
             chrome.extension.sendMessage({
                 getSettings: 1
             }, function(response) {
-                UpdateCookies(response.settings);
+                StashSettings(response.settings);
             });
             msg = 'BiuBiu is on now.';
         } else {
@@ -67,17 +60,21 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
             msg: msg
         });
     } else if (1 == request.updateCookies) {
-        UpdateCookies(request.settings);
+        StashSettings(request.settings);
         sendResponse({
             msg: 'Cookies updated !'
         });
     }
 });
 
-/*
- * Set cookies
- */
-function UpdateCookies(settings) {
+function InjectScript(source) {
+    var elem = document.createElement("script");
+    elem.type = "text/javascript";
+    elem.innerHTML = source;
+    document.documentElement.appendChild(elem);
+}
+
+function StashSettings(settings) {
     for (var key in settings) {
         if (key.indexOf('cookie') === 0) {
             $.cookie(key, settings[key]);

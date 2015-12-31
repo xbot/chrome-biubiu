@@ -46,7 +46,7 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
 });
 
 function OnPageActionClickedCB(tab) {
-    // Toggle pageAction icon and title according to whether the biubiu is on
+    // Toggle pageAction icon and title according to BiuBiu's status
     chrome.tabs.query({
         currentWindow: true,
         active: true
